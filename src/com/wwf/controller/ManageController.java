@@ -2,6 +2,7 @@ package com.wwf.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.sampled.AudioFormat.Encoding;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -211,11 +213,11 @@ public class ManageController {
 
 		try {
 			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write("书籍添加成功！2秒后转向主页");
+			response.getWriter().write("书籍添加成功！2秒后返回");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/home");
+		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showPageBooks");
 	}
 	
 	// 处理文件上传
@@ -300,12 +302,22 @@ public class ManageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showAllCategory");
+		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showPageCategorys");
 	}
 	
 	//修改书籍类型
 	@RequestMapping("/editCategory")
-	private void editCategory(Category category, HttpServletRequest request, HttpServletResponse response) {
+	private void editCategory(Category category, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		//从jsp页面中表单提交到服务器的数据都放在request body中，其编码格式虽然可以在页面设置，
+		//但有些流氓浏览器会将我们所设的忽略，故确保正确，需要我们在服务器端按想要的格式进行编码，
+		//下面就是重新编码书籍类别的信息，以便正确存储和显示中文
+		String name = category.getName();
+		String description = category.getDescription();
+		name = new String(name.getBytes("ISO-8859-1"),"UTF-8");
+		description = new String(description.getBytes("ISO-8859-1"),"UTF-8");
+		category.setName(name);
+		category.setDescription(description);
+		
 		categoryMapper.updateCategoryById(category);
 		try {
 			response.setContentType("text/html;charset=utf-8");
@@ -313,7 +325,7 @@ public class ManageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showAllCategory");
+		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showPageCategorys");
 	}
 	
 	//返回后台主页
@@ -354,7 +366,7 @@ public class ManageController {
 	
 	//添加图书类别，验证是否已登录
 	@RequestMapping("/addCategory")
-	private String addCategory(HttpServletRequest request, HttpServletResponse response) {
+	private String addCategory(HttpServletRequest request) {
 		if(!loginValidate(request)){
 			return "mlogin";
 		}
@@ -363,9 +375,15 @@ public class ManageController {
 	
 	//添加书籍类别的表单提交处理
 	@RequestMapping("/addCategorySubmit")
-	private void addCategorySubmit(Category category, 
-			HttpServletRequest request, HttpServletResponse response) {
+	private void addCategorySubmit(@RequestParam String name, @RequestParam(required=false) String description,
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
+		name = new String(name.getBytes("ISO-8859-1"),"UTF-8");
+		description = new String(description.getBytes("ISO-8859-1"),"UTF-8");
+		Category category = new Category();
 		category.setId(IdGenertor.genGUID());
+		category.setName(name);
+		category.setDescription(description);
+		System.out.println("ID=" + category.getId() + " name=" + category.getName() + " desp=" + category.getDescription());
 		categoryMapper.insertCategory(category);
 		try {
 			response.setContentType("text/html;charset=utf-8");
@@ -373,7 +391,7 @@ public class ManageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showAllCategory");
+		response.setHeader("Refresh", "2;URL=" + request.getContextPath() + "/manage/showPageCategorys");
 	}
 	
 	

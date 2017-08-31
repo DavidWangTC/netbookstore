@@ -269,7 +269,7 @@ public class ClientController {
 	private String showAllOrders(HttpServletRequest request, Model mod) {
 		Customer customer = (Customer) request.getSession().getAttribute(Constants.CUSTOMER_LOGIN_FLAG);
 		if(customer==null) {
-			return "/client/login.jsp";
+			return "/client/login";
 		}
 		List<Order> orders = orderMapper.findOrderByCustomerid(customer.getId());
 		mod.addAttribute("orders", orders);

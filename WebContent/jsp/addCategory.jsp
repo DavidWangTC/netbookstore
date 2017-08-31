@@ -1,7 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 	<%@include file="/jsp/mheader.jsp"%>
     
-    <form action="${pageContext.request.contextPath}/manage/addCategorySubmit" id="category" method="post">
+    <form action="${pageContext.request.contextPath}/manage/addCategorySubmit" method="post">
     	<table border="1" width="438" align="center">
     		<tr>
     			<td>*分类名称：</td>
@@ -23,14 +23,14 @@
     	</table>
     </form>
     <script type="text/javascript">
-    	function toSubmit(){
-    		var nameValue = document.getElementById("name").value;
-    		if(nameValue.trim()==""){
-    			alert("请输入分类名称");
-    			return;
-    		}
-    		document.forms[0].submit();
-    	}
+   	function toSubmit(){
+   		var nameValue = document.getElementById("name").value;
+   		if(nameValue.trim()==""){
+   			alert("请输入分类名称");
+   			return;
+   		}
+   		document.forms[0].submit();
+   	}
     </script>
   </body>
 </html>

@@ -17,23 +17,24 @@
 ### 项目界面
 
 1. 客户端主要界面
-![](images/4.jpg)
-![](images/5.jpg)
-![](images/15.jpg)
-![](images/7.jpg)
-![](images/8.jpg)
-![](images/6.jpg)
+![](bookpictures/4.jpg)
+![](bookpictures/5.jpg)
+![](bookpictures/15.jpg)
+![](bookpictures/7.jpg)
+![](bookpictures/8.jpg)
+![](bookpictures/6.jpg)
 
 2. 后端主要界面
-![](images/14.jpg)
-![](images/9.jpg)
-![](images/10.jpg)
-![](images/11.jpg)
-![](images/12.jpg)
-![](images/13.jpg)
+![](bookpictures/14.jpg)
+![](bookpictures/9.jpg)
+![](bookpictures/10.jpg)
+![](bookpictures/11.jpg)
+![](bookpictures/12.jpg)
+![](bookpictures/13.jpg)
 
 
 ## 存在问题
 1. 上传的图片均未显示成功
 2. 一些功能有待完善/或实现上不够简洁
 3. 项目代码不够模块化，以减少代码重复量
+4. 图书类型信息为中文时乱码

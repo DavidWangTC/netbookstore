@@ -20,7 +20,7 @@
 	    		</td>
 	    		<td>${b.name }</td>
 	    		<td>${b.author }</td>
-	    		<td>${b.price }</td>
+	    		<td>￥${b.price }</td>
 	    		<td>${b.description }</td>
 	    		<td>${b.category.name }</td>
 	    		<td>
