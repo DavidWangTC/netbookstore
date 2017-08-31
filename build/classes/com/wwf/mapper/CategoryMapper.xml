@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwf.mapper.CategoryMapper">
+	
+	<insert id="insertCategory" parameterType="Category">
+		insert into categorys (id, name, description) values (#{id}, #{name}, #{description})
+	</insert>
+	
+	<select id="findAllCategories" resultType="Category">
+		select * from categorys
+	</select>
+	
+	<update id="updateCategoryById" parameterType="Category">
+		update categorys set name=#{name}, description=#{description} where id = #{id}
+	</update>
+	
+	<delete id="deleteCategoryById" parameterType="java.lang.String">
+		delete from categorys where id=#{id}
+	</delete>
+	
+	<select id="findCategoryById" parameterType="java.lang.String" resultType="Category">
+		select * from categorys where id=#{categoryId}
+	</select>
+	
+	<select id="getTotalRecordsNum" resultType="java.lang.Integer">
+		select count(*) from categorys
+	</select>
+	
+	<select id="findPageRecords" parameterType="java.util.Map" resultType="Category">
+		select * from categorys limit #{startIndex}, #{pageSize}
+	</select>
+	
+</mapper>

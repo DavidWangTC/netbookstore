@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwf.mapper.OrderMapper">
+	
+	<insert id="genOrder" parameterType="Order">
+		insert into orders (ordernum, quantity, money, status, customerId) 
+					values (#{order.ordernum},#{order.quantity},#{order.money},#{order.status},#{customerId})
+	</insert>
+	
+	<select id="findOrderByCustomerid" parameterType="java.lang.String" resultType="Order">
+		select ordernum,quantity,money,status from orders where customerId=#{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<typeAliases>
+		<!-- 2. 指定扫描包，会把包内所有的类都设置别名，默认为类名首字母小写 -->
+		<package name="com.wwf.domain" />
+	</typeAliases>
+	
+</configuration>

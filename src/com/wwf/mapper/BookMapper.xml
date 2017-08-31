@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwf.mapper.BookMapper">
+	
+	<insert id="save" parameterType="java.util.Map">
+		insert into books (id,name,author,price,path,filename,description,categoryId)
+					values(#{id},#{name},#{author},#{price},#{path},#{filename},#{description},#{categoryId})
+	</insert>
+	
+	<select id="findBookById" parameterType="java.lang.String" resultType="Book">
+		select * from books where id=#{bookId}
+	</select>
+	
+	<select id="getTotalRecordsNum" resultType="java.lang.Integer">
+		select count(*) from books
+	</select>
+	
+	<select id="findPageRecords" parameterType="java.util.Map" resultType="Book">
+		select * from books limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="findPageRecordsByCategory" parameterType="java.util.Map" resultType="Book">
+		select * from books where categoryId=#{categoryId} limit #{startIndex}, #{pageSize}
+	</select>
+	
+	<delete id="deleteBookById" parameterType="java.lang.String">
+		delete from books where id=#{bookId}
+	</delete>
+	
+	<update id="updateBookById" parameterType="java.util.Map">
+		update books
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="author != null">author=#{author},</if>
+			<if test="price != null">price=#{price},</if>
+			<if test="decription != null">description=#{description},</if>
+			<if test="path != null">path=#{path},</if>
+			<if test="filename != null">filename=#{filename},</if>
+			<if test="categoryId != null">categoryId=#{categoryId},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getCategoryTotalRecordsNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from books where categoryId=#{categoryId}
+	</select>
+	
+</mapper>
