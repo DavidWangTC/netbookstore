@@ -10,10 +10,10 @@
     	<tr>
     		<c:forEach items="${page.records }" var="b">
     			<td align="center">
-    				<img src="${pageContext.request.contextPath}/images/${b.path}/${b.filename}" alt="${b.filename}"/><br/>
+    				<img width="83" height="118" src="${pageContext.request.contextPath}/images/${b.path}/${b.filename}" alt="${b.filename}"/><br/>
     				书名：${b.name}<br/>
     				作者：${b.author}<br/>
-    				单价：${b.price }<br/>
+    				单价：￥${b.price }<br/>
     				<a href="${pageContext.request.contextPath}/client/showBookDetail?bookId=${b.id}">去看看</a>
     			</td>
     		</c:forEach>

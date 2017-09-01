@@ -15,9 +15,7 @@
 		select count(*) from books
 	</select>
 	
-	<select id="findPageRecords" parameterType="java.util.Map" resultType="Book">
-		select * from books limit #{startIndex}, #{pageSize}
-	</select>
+	
 	
 	<select id="findPageRecordsByCategory" parameterType="java.util.Map" resultType="Book">
 		select * from books where categoryId=#{categoryId} limit #{startIndex}, #{pageSize}
@@ -44,5 +42,26 @@
 	<select id="getCategoryTotalRecordsNum" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from books where categoryId=#{categoryId}
 	</select>
+	
+	<resultMap type="Book" id="bookcategory">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="author" column="author"/>
+		<result property="price" column="price"/>
+		<result property="path" column="path"/>
+		<result property="filename" column="filename"/>
+		<result property="description" column="description"/>
+		<association property="category" javaType="Category">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="description" column="description"/>
+		</association>
+	</resultMap>
+	
+	<select id="findPageRecords" parameterType="java.util.Map" resultMap="bookcategory">
+		select * from books limit #{startIndex}, #{pageSize}
+	</select>
+	
+	
 	
 </mapper>

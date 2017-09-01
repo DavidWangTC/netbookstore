@@ -17,8 +17,8 @@
     			<tr class="${vs.index%2==0?'odd':'even' }">
 	    			<td>${me.value.book.name}</td>
 	    			<td><input type="text" id="quantity" value="${me.value.quantity}" size="2" onchange="changeNum(this,${me.value.quantity},'${me.value.book.id}')"/></td>
-	    			<td>${me.value.book.price}</td>
-	    			<td>${me.value.money}</td>
+	    			<td>￥${me.value.book.price}</td>
+	    			<td>￥${me.value.money}</td>
 	    			<td>
 	    				<a href="javascript:delOneItem('${me.key}')">删除</a>
 	    			</td>
@@ -28,7 +28,7 @@
     			<td colspan="5" align="right">
     				<a href="javascript:delAllItems()">清空购物车</a>
     				总数量：${sessionScope.cart.totalQuantity}
-    				应付金额：${sessionScope.cart.totalMoney}
+    				应付金额：￥${sessionScope.cart.totalMoney}
     				<a href="${pageContext.request.contextPath}/client/genOrder">去结算</a>
     			</td>
     		</tr>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.wwf.common.Page;
 import com.wwf.domain.Book;
+import com.wwf.domain.Category;
 
 public interface BookMapper {
 
@@ -38,8 +39,6 @@ public interface BookMapper {
 	 */
 	List<Book> findPageRecords(Map<String, Object> map);
 
-	
-
 	List<Book> findPageRecords(int startIndex, int pageSize, String categoryId);
 
 	/**
@@ -51,6 +50,5 @@ public interface BookMapper {
 	void deleteBookById(String bookId);
 
 	List<Book> findPageRecordsByCategory(Map<String, Object> map);
-
 
 }

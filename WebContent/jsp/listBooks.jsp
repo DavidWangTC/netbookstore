@@ -16,7 +16,7 @@
     		<tr class="${vs.index%2==0?'odd':'even'}">
 	    		<td>${vs.count}</td>
 	    		<td>
-	    			<img src="${pageContext.request.contextPath}/images/${b.path}/${b.filename}" alt="${b.filename}"/>
+	    			<img width="83" height="118" src="${pageContext.request.contextPath}/images/${b.path}/${b.filename}" alt="${b.filename}"/>
 	    		</td>
 	    		<td>${b.name }</td>
 	    		<td>${b.author }</td>

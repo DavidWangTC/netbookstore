@@ -25,8 +25,8 @@
 ![](bookpictures/6.jpg)
 
 2. 后端主要界面
-![](bookpictures/14.jpg)
-![](bookpictures/9.jpg)
+![14](bookpictures/14.jpg)
+![9](bookpictures/9.jpg)
 ![](bookpictures/10.jpg)
 ![](bookpictures/11.jpg)
 ![](bookpictures/12.jpg)
@@ -37,4 +37,3 @@
 1. 上传的图片均未显示成功
 2. 一些功能有待完善/或实现上不够简洁
 3. 项目代码不够模块化，以减少代码重复量
-4. 图书类型信息为中文时乱码
