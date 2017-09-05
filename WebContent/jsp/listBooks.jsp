@@ -35,7 +35,8 @@
     		</td>
     	</tr>
     </table>
-    
+    <br>
+    <br>
     <script type="text/javascript">
     function deleteBook(id){
 		var sure = window.confirm("确定要删除该项吗？");

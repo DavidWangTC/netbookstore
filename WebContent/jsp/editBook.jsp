@@ -36,8 +36,7 @@
     		<tr>
     			<td>描述：</td>
     			<td>
-    				<textarea rows="3" cols="38" id="area1" name="description">${book.description}</textarea>
-    				<span style="cursor:pointer;text-decoration:underline;" onclick="change('看内容看变了');">点击改变文本域内容</span>
+    				<textarea rows="3" cols="38" id="area1" name="description" placeholder="${book.description}"></textarea>
     			</td>
     		</tr>
     		<tr>
@@ -45,7 +44,12 @@
     			<td>
     				<select name="categoryId">
     					<c:forEach items="${cs}" var="c">
-    						<option value="${c.id}">${c.name}</option>
+    						<c:if test='${c.id == book.category.id}'>
+    							<option value="${c.id}" selected>${c.name}</option>
+    						</c:if>
+    						<c:if test='${c.id != book.category.id}'>
+    							<option value="${c.id}" >${c.name}</option>
+    						</c:if>
     					</c:forEach>
     				</select>
     			</td>
@@ -57,9 +61,10 @@
     		</tr>
     	</table>
     </form>
+    <!-- <span style="cursor:pointer;text-decoration:underline;" onclick="change('看内容看变了');">点击改变文本域内容</span> -->
     <script>
 		function change(str){
-		document.getElementById("area1").innerText=str;
+			document.getElementById("area1").innerText=str;
 		}
 	</script>
   </body>

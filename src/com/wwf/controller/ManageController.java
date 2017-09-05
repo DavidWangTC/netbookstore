@@ -91,16 +91,17 @@ public class ManageController {
 		}
 
 		Book book = new Book();// 空对象
-
+		System.out.println("newbook.path=" + book.getPath() + " newbook.filename=" + book.getFilename());
 		for (FileItem item : items) {
 			// 普通字段：把数据封装到Book对象中
 			if (item.isFormField()) {
 				processFormFiled(item, book);
 			} else {
 				// 上传字段：上传
-				processUploadFiled(request, item, book);
+				if(item!=null) processUploadFiled(request, item, book);
 			}
 		}
+		System.out.println("newbook.path=" + book.getPath() + " newbook.filename=" + book.getFilename());
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id", book.getId());
 		map.put("name", book.getName());
@@ -129,6 +130,9 @@ public class ManageController {
 		mod.addAttribute("cs", cs);
 		Book book = bookMapper.findBookById(id);
 		mod.addAttribute("book", book);
+	if(book.getCategory()==null) {
+		System.out.println("book.category==null");
+	}
 		return "editBook";
 	}
 	
@@ -222,19 +226,18 @@ public class ManageController {
 	
 	// 处理文件上传
 	private void processUploadFiled(HttpServletRequest request, FileItem item, Book book) {
+		String filename = item.getName(); // 如a.jpg
+		if (filename == null || filename == "") return;
 		// 存放路径：不要放在WEB-INF中
 		String storeDirectory = request.getServletContext().getRealPath("/images");
 		File rootDirectory = new File(storeDirectory);
 		if (!rootDirectory.exists()) {
 			rootDirectory.mkdirs();
 		}
-		// 搞文件名
-		String filename = item.getName();// a.jpg
-		if (filename != null) {
-			filename = IdGenertor.genGUID() + "." + FilenameUtils.getExtension(filename);// LKDSJFLKSFKS.jpg
-			book.setFilename(filename);
-		}
-
+		// 生成文件名
+		filename = IdGenertor.genGUID() + "." + FilenameUtils.getExtension(filename);// LKDSJFLKSFKS.jpg
+		book.setFilename(filename);
+		
 		// 计算子目录
 		String path = genChildDirectory(storeDirectory, filename);
 		book.setPath(path);
@@ -242,11 +245,10 @@ public class ManageController {
 		// 文件上传
 		try {
 			item.write(new File(rootDirectory, path + File.separator + filename));
-//			System.out.println(item.getName() + "has been upload to " + rootDirectory + "/" + path + "/" + filename);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	
 	}
 
 	private String genChildDirectory(String realPath, String fileName) {
